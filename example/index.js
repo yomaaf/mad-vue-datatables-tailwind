@@ -223,6 +223,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'App',
@@ -798,7 +799,7 @@ var myUniqueId = 1;
         var tr = target.closest('tr');
 
         if (tr) {
-          if (tr.attr('role') !== 'row') {
+          if (tr.hasClass('child')) {
             tr = tr.prev();
           }
 
@@ -1428,9 +1429,15 @@ var render = function() {
             key: "default",
             fn: function(props) {
               return [
-                _c("button", { attrs: { "data-action": "testing" } }, [
-                  _vm._v("\n  " + _vm._s(props.ctx.data.name) + "\n  ")
-                ])
+                _c(
+                  "button",
+                  {
+                    staticClass:
+                      "group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500",
+                    attrs: { "data-action": "testing" }
+                  },
+                  [_vm._v("\n  " + _vm._s(props.ctx.data.name) + "\n  ")]
+                )
               ]
             }
           }
