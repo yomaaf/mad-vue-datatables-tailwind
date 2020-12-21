@@ -447,7 +447,14 @@ __webpack_require__.r(__webpack_exports__);
         lengthChange: true,
         serverSide: true,
         fixedHeader: true,
-        saveState: true,
+        'bStateSave': true,
+        'fnStateSave': function fnStateSave(oSettings, oData) {
+          localStorage.setItem('madvuedatatables_' + window.location.pathname, JSON.stringify(oData));
+        },
+        'fnStateLoad': function fnStateLoad(oSettings) {
+          var data = localStorage.getItem('madvuedatatables_' + window.location.pathname);
+          return JSON.parse(data);
+        },
         language: languages[vm.language] !== undefined ? languages[vm.language] : languages.id
       },
       quickSearch: '',

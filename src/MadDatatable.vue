@@ -146,7 +146,14 @@ export default {
         lengthChange: true,
         serverSide: true,
         fixedHeader: true,
-        saveState: true,
+        'bStateSave': true,
+        'fnStateSave': function (oSettings, oData) {
+            localStorage.setItem('madvuedatatables_' + window.location.pathname, JSON.stringify(oData))
+        },
+        'fnStateLoad': function (oSettings) {
+            var data = localStorage.getItem('madvuedatatables_' + window.location.pathname)
+            return JSON.parse(data)
+        },
         language: languages[vm.language]!==undefined?languages[vm.language]:languages.id
       },
       quickSearch: '',
