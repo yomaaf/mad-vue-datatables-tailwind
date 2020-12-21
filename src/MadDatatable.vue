@@ -139,19 +139,19 @@ export default {
         responsive: true,
         processing: true,
         searching: true,
-        searchDelay: 1500,
         destroy: true,
         orderCellsTop: true,
         ordering: true,
         lengthChange: true,
         serverSide: true,
         fixedHeader: true,
-        'bStateSave': true,
+        stateSave: true,
+        stateDuration: -1,
         'fnStateSave': function (oSettings, oData) {
-            localStorage.setItem('madvuedatatables_' + window.location.pathname, JSON.stringify(oData))
+            sessionStorage.setItem('madvuedatatables_' + window.location.pathname, JSON.stringify(oData))
         },
         'fnStateLoad': function (oSettings) {
-            var data = localStorage.getItem('madvuedatatables_' + window.location.pathname)
+            var data = sessionStorage.getItem('madvuedatatables_' + window.location.pathname)
             return JSON.parse(data)
         },
         language: languages[vm.language]!==undefined?languages[vm.language]:languages.id
