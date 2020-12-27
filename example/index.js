@@ -324,8 +324,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 // this demonstrate with buttons and responsive master/details row
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -375,44 +373,44 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     var languages = {
       en: {
-        'sEmptyTable': 'No data available in table',
-        'sInfo': 'Showing _START_ to _END_ of _TOTAL_ entries',
-        'sInfoEmpty': 'Showing 0 to 0 of 0 entries',
-        'sInfoFiltered': '(filtered from _MAX_ total entries)',
-        'sInfoPostFix': '',
-        'sInfoThousands': ',',
-        'sLengthMenu': 'Show _MENU_ entries',
-        'sLoadingRecords': 'Loading...',
-        'sProcessing': 'Processing...',
-        'sSearch': 'Search:',
-        'sZeroRecords': 'No matching records found',
-        'oPaginate': {
-          'sFirst': '<<',
-          'sLast': '>>',
-          'sNext': '>',
-          'sPrevious': '<'
+        sEmptyTable: 'No data available in table',
+        sInfo: 'Showing _START_ to _END_ of _TOTAL_ entries',
+        sInfoEmpty: 'Showing 0 to 0 of 0 entries',
+        sInfoFiltered: '(filtered from _MAX_ total entries)',
+        sInfoPostFix: '',
+        sInfoThousands: ',',
+        sLengthMenu: 'Show _MENU_ entries',
+        sLoadingRecords: 'Loading...',
+        sProcessing: 'Processing...',
+        sSearch: 'Search:',
+        sZeroRecords: 'No matching records found',
+        oPaginate: {
+          sFirst: '<<',
+          sLast: '>>',
+          sNext: '>',
+          sPrevious: '<'
         },
-        'oAria': {
-          'sSortAscending': ': activate to sort column ascending',
-          'sSortDescending': ': activate to sort column descending'
+        oAria: {
+          sSortAscending: ': activate to sort column ascending',
+          sSortDescending: ': activate to sort column descending'
         }
       },
       id: {
-        'sEmptyTable': 'Tidak ada data yang tersedia pada tabel ini',
-        'sProcessing': 'Sedang memproses...',
-        'sLengthMenu': 'Tampilkan _MENU_ entri',
-        'sZeroRecords': 'Tidak ditemukan data yang sesuai',
-        'sInfo': 'Menampilkan _START_ sampai _END_ dari _TOTAL_ entri',
-        'sInfoEmpty': 'Menampilkan 0 sampai 0 dari 0 entri',
-        'sInfoFiltered': '(disaring dari _MAX_ entri keseluruhan)',
-        'sInfoPostFix': '',
-        'sSearch': 'Cari:',
-        'sUrl': '',
-        'oPaginate': {
-          'sFirst': '<<',
-          'sLast': '>>',
-          'sNext': '>',
-          'sPrevious': '<'
+        sEmptyTable: 'Tidak ada data yang tersedia pada tabel ini',
+        sProcessing: 'Sedang memproses...',
+        sLengthMenu: 'Tampilkan _MENU_ entri',
+        sZeroRecords: 'Tidak ditemukan data yang sesuai',
+        sInfo: 'Menampilkan _START_ sampai _END_ dari _TOTAL_ entri',
+        sInfoEmpty: 'Menampilkan 0 sampai 0 dari 0 entri',
+        sInfoFiltered: '(disaring dari _MAX_ entri keseluruhan)',
+        sInfoPostFix: '',
+        sSearch: 'Cari:',
+        sUrl: '',
+        oPaginate: {
+          sFirst: '<<',
+          sLast: '>>',
+          sNext: '>',
+          sPrevious: '<'
         }
       }
     };
@@ -426,7 +424,7 @@ __webpack_require__.r(__webpack_exports__);
             return json.data;
           },
           headers: {
-            'Authorization': "Bearer ".concat(localStorage.getItem('token'))
+            Authorization: "Bearer ".concat(localStorage.getItem('token'))
           },
           data: Object.assign({}, this.trigger)
         },
@@ -448,10 +446,10 @@ __webpack_require__.r(__webpack_exports__);
         fixedHeader: true,
         stateSave: true,
         stateDuration: -1,
-        'fnStateSave': function fnStateSave(oSettings, oData) {
+        fnStateSave: function fnStateSave(oSettings, oData) {
           sessionStorage.setItem('madvuedatatables_' + window.location.pathname, JSON.stringify(oData));
         },
-        'fnStateLoad': function fnStateLoad(oSettings) {
+        fnStateLoad: function fnStateLoad(oSettings) {
           var data = sessionStorage.getItem('madvuedatatables_' + window.location.pathname);
           return JSON.parse(data);
         },
@@ -543,8 +541,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_dist_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue/dist/vue */ "./node_modules/vue/dist/vue.js");
 /* harmony import */ var vue_dist_vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_dist_vue__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
 //
 //
 //
@@ -782,11 +778,44 @@ var myUniqueId = 1;
           });
         });
       });
-      $(window).ready(function () {
-        that.dataTable.responsive.recalc();
-      });
     }
 
+    $(window).ready(function () {
+      if ($("#".concat(that.tableId, " thead tr:eq(1)")).length == 1) {
+        $("#".concat(that.tableId, " thead tr:eq(1)")).remove();
+      }
+
+      $("#".concat(that.tableId, " thead tr")).clone(true).appendTo("#".concat(that.tableId, " thead"));
+      $("#".concat(that.tableId, " thead tr:eq(1) th")).each(function (i) {
+        var title = $(this).text();
+        var numbering = 0;
+
+        for (var ii in that.dtfields) {
+          if (numbering == i) {
+            var _field2 = that.dtfields[ii];
+
+            if (_field2.hasOwnProperty('searchable')) {
+              if (_field2.searchable) {
+                $(this).html('<input type="text" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="' + title + '" value="' + that.dataTable.column(i).search() + '" />');
+              } else {
+                $(this).html('');
+              }
+            } else {
+              $(this).html('<input type="text" class="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md" placeholder="' + title + '" value="' + that.dataTable.column(i).search() + '" />');
+            }
+          }
+
+          numbering++;
+        }
+
+        $('input', this).on('keyup change', function () {
+          if (that.dataTable.column(i).search() !== this.value) {
+            that.dataTable.column(i).search(this.value).draw();
+          }
+        });
+      });
+      that.dataTable.responsive.recalc();
+    });
     $el.on('click', '[data-action]', function (e) {
       e.preventDefault();
       e.stopPropagation();
