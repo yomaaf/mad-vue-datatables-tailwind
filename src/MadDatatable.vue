@@ -130,6 +130,13 @@ export default {
           data: Object.assign({}, this.trigger)
         },
         buttons: [],
+        'drawCallback': function( settings ) {
+          $('tbody > tr').each(function(i) {
+            if(!$(this).attr('role')) {
+              $(this).attr('role', 'row')
+            }
+          })
+        },
         /*eslint-disable */
         // dom:
         // "<'row'<'col-sm-12 col-md-6'l><'col-sm-12 col-md-6'f>><'row'<'col-sm-12'tr>><'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",

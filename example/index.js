@@ -429,6 +429,13 @@ __webpack_require__.r(__webpack_exports__);
           data: Object.assign({}, this.trigger)
         },
         buttons: [],
+        'drawCallback': function drawCallback(settings) {
+          $('tbody > tr').each(function (i) {
+            if (!$(this).attr('role')) {
+              $(this).attr('role', 'row');
+            }
+          });
+        },
 
         /*eslint-disable */
         // dom:
