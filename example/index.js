@@ -757,6 +757,9 @@ var myUniqueId = 1;
 
         $("#".concat(that.tableId, " thead tr")).clone(true).appendTo("#".concat(that.tableId, " thead"));
         $("#".concat(that.tableId, " thead tr:eq(1) th")).each(function (i) {
+          $(this).removeClass('sorting');
+          $(this).removeClass('sorting_desc');
+          $(this).removeClass('sorting_asc');
           var title = $(this).text();
           var numbering = 0;
 
@@ -794,6 +797,9 @@ var myUniqueId = 1;
 
       $("#".concat(that.tableId, " thead tr")).clone(true).appendTo("#".concat(that.tableId, " thead"));
       $("#".concat(that.tableId, " thead tr:eq(1) th")).each(function (i) {
+        $(this).removeClass('sorting');
+        $(this).removeClass('sorting_desc');
+        $(this).removeClass('sorting_asc');
         var title = $(this).text();
         var numbering = 0;
 

@@ -212,6 +212,9 @@ export default {
           .clone(true)
           .appendTo(`#${that.tableId} thead`)
         $(`#${that.tableId} thead tr:eq(1) th`).each(function(i) {
+          $(this).removeClass('sorting')
+          $(this).removeClass('sorting_desc')
+          $(this).removeClass('sorting_asc')
           var title = $(this).text()
           let numbering = 0
           for (let ii in that.dtfields) {
@@ -260,6 +263,9 @@ export default {
         .clone(true)
         .appendTo(`#${that.tableId} thead`)
       $(`#${that.tableId} thead tr:eq(1) th`).each(function(i) {
+        $(this).removeClass('sorting')
+        $(this).removeClass('sorting_desc')
+        $(this).removeClass('sorting_asc')
         var title = $(this).text()
         let numbering = 0
         for (let ii in that.dtfields) {
